@@ -30,6 +30,8 @@ services:
     expose:
       - "9000"
     restart: unless-stopped
+    env_file:
+      - .env
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb
@@ -53,6 +55,6 @@ services:
     depends_on:
       - mariadb
       - wordpress
-    expose:
+    ports:
       - "443:443"
     restart: unless-stopped
