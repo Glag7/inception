@@ -15,10 +15,7 @@ stop:
 	docker compose -f ./srcs/docker-compose.yml stop
 
 fclean:
-	rm -rf /home/glaguyon/data/
 	docker system prune -af
-	docker volume rm wordpress mariadb
-
 
 re: stop fclean all
 
