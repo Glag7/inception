@@ -29,7 +29,7 @@ services:
       - mariadb
     expose:
       - "9000"
-    restart: unless-stop
+    restart: unless-stopped
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb
@@ -42,7 +42,7 @@ services:
     environment:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
-    restart: unless-stop
+    restart: unless-stopped
   nginx:
     container_name: nginx
     build: ./requirements/nginx
@@ -55,4 +55,4 @@ services:
       - wordpress
     expose:
       - "443:443"
-    restart: unless-stop
+    restart: unless-stopped
