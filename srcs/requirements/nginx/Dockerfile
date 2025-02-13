@@ -1,5 +1,5 @@
 FROM debian:bullseye
-RUN apt update && apt upgrade && apt install -y nginx zsh
+RUN apt update && apt upgrade -y && apt install -y nginx zsh
 
 RUN mkdir -p /etc/nginx/ssl \
 		&& apt install -y openssl \ 

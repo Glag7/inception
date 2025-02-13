@@ -1,5 +1,5 @@
 FROM debian:bullseye
-RUN apt update && apt upgrade && apt install -y curl php-fpm php-mysqli zsh
+RUN apt update && apt upgrade -y && apt install -y curl php-fpm php-mysqli php-redis zsh
 RUN mkdir -p /run/php && chown www-data:www-data /run/php
 COPY www.conf /etc/php/7.4/fpm/pool.d
 WORKDIR /var/www/html

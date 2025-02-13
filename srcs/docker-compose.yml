@@ -6,6 +6,7 @@ volumes:
       device: /home/glaguyon/data/mariadb
       o: bind
       type: none
+
   wordpress:
     name: wordpress
     driver: local
@@ -13,10 +14,14 @@ volumes:
       device: /home/glaguyon/data/wordpress
       o: bind
       type: none
+
+
 networks:
   inception:
     name: inception
     driver: bridge
+
+
 services:
   wordpress:
     container_name: wordpress
@@ -27,11 +32,13 @@ services:
       - wordpress:/var/www/html
     depends_on:
       - mariadb
+      - redis
     expose:
       - "9000"
     restart: unless-stopped
     env_file:
       - .env
+
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb
@@ -45,6 +52,7 @@ services:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
     restart: unless-stopped
+
   nginx:
     container_name: nginx
     build: ./requirements/nginx
@@ -53,8 +61,16 @@ services:
     volumes:
       - wordpress:/var/www/html
     depends_on:
-      - mariadb
       - wordpress
     ports:
       - "443:443"
+    restart: unless-stopped
+
+  redis:
+    container_name: redis
+    build: ./requirements/redis
+    networks: 
+      - inception
+    expose:
+      - "6379"
     restart: unless-stopped
