@@ -17,7 +17,12 @@ stop:
 fclean:
 	docker system prune -af
 
+delete: stop fclean
+	rm -rf /home/glaguyon/data
+
 re: stop fclean all
 
+rere: delete all
+
 .PHONY:
-	all up down fclean re start stop
+	all up down fclean re start stop delete rere

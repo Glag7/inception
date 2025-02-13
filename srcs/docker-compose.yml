@@ -74,3 +74,22 @@ services:
     expose:
       - "6379"
     restart: unless-stopped
+
+  ftp:
+    container_name: ftp
+    build: ./requirements/ftp
+    networks: 
+      - inception
+    volumes:
+      - wordpress:/var/www/html
+    depends_on:
+      - wordpress
+    ports:
+      - "21:21"
+      - "20:20"
+      - "21100-21110:21100-21110"
+    environment:
+      FTP_USER: ${FTP_USER}
+      FTP_PASS: ${FTP_PASS}
+    restart: unless-stopped
+    
