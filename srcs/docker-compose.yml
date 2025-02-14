@@ -107,7 +107,10 @@ services:
     networks:
       - inception
     volumes:
-      - adminer:/var/www/html  # Separate volume for Adminer files
+      - adminer:/var/www/html
     expose:
-      - "9000"  # PHP-FPM port
+      - "9000"
+    depends_on:
+      - wordpress
+      - mariadb
     restart: unless-stopped
