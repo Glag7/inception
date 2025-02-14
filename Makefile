@@ -3,6 +3,7 @@ all: up
 up:
 	mkdir -p /home/glaguyon/data/mariadb
 	mkdir -p /home/glaguyon/data/wordpress
+	mkdir -p /home/glaguyon/data/adminer
 	docker compose -f ./srcs/docker-compose.yml up -d
 
 down:
