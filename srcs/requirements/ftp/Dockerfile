@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-RUN apt update && apt upgrade -y && apt install -y vsftpd zsh
+RUN apt update && apt upgrade -y && apt install -y vsftpd
 
 RUN mkdir -p /var/run/vsftpd/empty
 

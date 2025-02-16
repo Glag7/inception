@@ -23,6 +23,14 @@ volumes:
       o: bind
       type: none
 
+  static_site:
+    name: static_site
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/glaguyon/data/static_site
+      o: bind
+
 
 networks:
   inception:
@@ -68,9 +76,11 @@ services:
       - inception
     volumes:
       - wordpress:/var/www/html
+      - static_site:/var/www/static_site
     depends_on:
       - wordpress
       - adminer
+      - static_site
     ports:
       - "443:443"
     restart: unless-stopped
@@ -129,3 +139,12 @@ services:
       - /sys:/sys:ro 
       - /var/lib/docker/:/var/lib/docker:ro
     restart: unless-stopped
+
+  static_site:
+    container_name: static_site
+    build: ./requirements/static_site
+    volumes:
+      - static_site:/var/www/static_site
+    restart: unless-stopped
+    networks:
+      - inception
